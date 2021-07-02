@@ -1,14 +1,23 @@
 import React from 'react';
-import { getCoords } from './API.js';
+import { getCoords } from './API';
+import { TableCoords } from './components/TableCoords';
 import './App.css';
 
 // React.useEffect(f, deps)
 // Dropdown вызывает сетАйди и изменяет айди.
 
 function SelectObject(props) {
+  let onChange = (event) => {
+    if (event.target.value === '') {
+      props.onSelectObjectId(null);
+    } else {
+      props.onSelectObjectId(event.target.value);
+    }
+  };
+
   return (
-    <select value={props.id} onChange={props.onSelectObjectId}>
-      <option defaultValue=''>Выберите объект перемещения</option>
+    <select value={props.id == null ? '' : props.id} onChange={onChange}>
+      <option value=''>Выберите объект перемещения</option>
       <option value='1'>1</option>
       <option value='2'>2</option>
       <option value='3'>3</option>
@@ -18,38 +27,34 @@ function SelectObject(props) {
 }
 
 function App() {
-  // console.log(getCoords('1'));
-
-  // Currently selected object id
-  // let id = '42';
-
   // Store currently data or null (if nothing is fetched)
   let [data, setData] = React.useState(null);
-  let [id, setId] = React.useState('');
+  let [id, setId] = React.useState(null);
 
   // Start fetching data
   React.useEffect(() => {
     console.log('start fetching...');
 
-    getCoords(id).then((coords) => {
-      console.log(coords);
-      if (id > 0) setData(coords);
-    });
+    if (id !== null) {
+      getCoords(id).then((coords) => {
+        console.log(coords);
+        setData(coords);
+      });
+    } else {
+      setData(null);
+    }
   }, [id]);
-
-  function onSelectObjectId(event) {
-    setId(event.target.value);
-  }
 
   return (
     <div className='App'>
-      <SelectObject defaultValue='' id={id} onSelectObjectId={onSelectObjectId} />
-      <main>
-        {data != null ? (
-          <pre>{JSON.stringify(data)}</pre>
-        ) : (
-          <span>Вы пока ничего не выбрали...</span>
-        )}
+      <main className='container'>
+        <div className='container__select'>
+          <SelectObject id={id} onSelectObjectId={setId} />
+        </div>
+
+        <div className='container__table'>
+          {data != null ? <TableCoords data={data} /> : <span>Вы пока ничего не выбрали...</span>}
+        </div>
       </main>
     </div>
   );

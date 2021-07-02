@@ -45,3 +45,22 @@
 .container__select {
   margin-bottom: 1rem;
 }
+
+.main-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+.main-table th {
+  border: 1px solid #303030;
+  padding: 0.5rem;
+}
+
+.main-table td {
+  border: 1px solid #303030;
+  padding: 0.25rem 0.5rem;
+}
+
+.main-table__id {
+  max-width: 100px;
+}
