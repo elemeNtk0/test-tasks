@@ -3,9 +3,6 @@ import { getCoords } from './API';
 import { TableCoords } from './components/TableCoords';
 import './App.css';
 
-// React.useEffect(f, deps)
-// Dropdown вызывает сетАйди и изменяет айди.
-
 function SelectObject(props) {
   let onChange = (event) => {
     if (event.target.value === '') {

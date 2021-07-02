@@ -1,16 +1,6 @@
-// слой данных.
-
-// СОздаём промис.
-// запускаем 4-10c
-// Резолвим с данными об обьекте
-
-// Рандомно генерим число (длину массива coords)
-// от 0 до N → идёт время = индексу
-// Координаты рандомно
-
 export function getCoords(objectId) {
-  // let timeout = (Math.random() * 6 + 4) * 1000; // 4000 - 10000ms
-  let timeout = Math.random() * 1000; // 4000 - 10000ms
+  // let timeout = Math.random() * 1000; // 4000 - 10000ms
+  let timeout = (Math.random() * 6 + 4) * 1000; // 4000 - 10000ms
   let coords = [];
 
   let coordsLength = Math.floor(Math.random() * 100); // 0 to 100
