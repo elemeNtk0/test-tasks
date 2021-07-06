@@ -3,17 +3,19 @@ import { getCoords } from './API';
 import { TableCoords } from './components/TableCoords';
 import './App.css';
 
-function SelectObject(props) {
-  let onChange = (event) => {
-    if (event.target.value === '') {
-      props.onSelectObjectId(null);
+function SelectObject({ setData }) {
+  const onChange = async (event) => {
+    const id = event.target.value;
+    if (id !== '') {
+      const coords = await getCoords(id);
+      setData(coords);
     } else {
-      props.onSelectObjectId(event.target.value);
+      setData(null);
     }
   };
 
   return (
-    <select value={props.id == null ? '' : props.id} onChange={onChange}>
+    <select onChange={onChange}>
       <option value=''>Выберите объект перемещения</option>
       <option value='1'>1</option>
       <option value='2'>2</option>
@@ -25,32 +27,17 @@ function SelectObject(props) {
 
 function App() {
   // Store currently data or null (if nothing is fetched)
-  let [data, setData] = React.useState(null);
-  let [id, setId] = React.useState(null);
-
-  // Start fetching data
-  React.useEffect(() => {
-    console.log('start fetching...');
-
-    if (id !== null) {
-      getCoords(id).then((coords) => {
-        console.log(coords);
-        setData(coords);
-      });
-    } else {
-      setData(null);
-    }
-  }, [id]);
+  const [data, setData] = React.useState(null);
 
   return (
     <div className='App'>
       <main className='container'>
         <div className='container__select'>
-          <SelectObject id={id} onSelectObjectId={setId} />
+          <SelectObject setData={setData} />
         </div>
 
         <div className='container__table'>
-          {data != null ? <TableCoords data={data} /> : <span>Вы пока ничего не выбрали...</span>}
+          {data ? <TableCoords data={data} /> : <span>Вы пока ничего не выбрали...</span>}
         </div>
       </main>
     </div>

@@ -31,6 +31,7 @@ function THead() {
     </thead>
   );
 }
+
 export function TableCoords(props) {
   return (
     <table className='main-table'>
