@@ -4,7 +4,7 @@ import './Main.css';
 export function Main(props) {
   return (
     <main className='main'>
-      тут будет опросник
+      <div className='container'>Спасибо, идите на хуй.</div>
     </main>
   );
 }
