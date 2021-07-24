@@ -20,7 +20,7 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 
-app.get('/GETCOORDS/:id', async (req, res) => {
+app.post('/GETCOORDS/:id', async (req, res) => {
   res.send(JSON.stringify(await getCoords(req.params.id)));
 });
 

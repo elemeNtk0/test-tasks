@@ -7,7 +7,9 @@ function SelectObject({ setData }) {
   const onChange = async (event) => {
     const id = event.target.value;
     if (id !== '') {
-      const coords = await fetch(`http://localhost:3003/GETCOORDS/${id}`).then((response) => response.json());
+      const coords = await fetch(`http://localhost:3003/GETCOORDS/${id}`, { method: 'POST' }).then((response) =>
+        response.json()
+      );
       setData(coords);
     } else {
       setData(null);
