@@ -1,5 +1,5 @@
 import React from 'react';
-import { getCoords } from './API';
+// import { getCoords } from './API';
 import { TableCoords } from './components/TableCoords';
 import './App.css';
 
@@ -7,7 +7,7 @@ function SelectObject({ setData }) {
   const onChange = async (event) => {
     const id = event.target.value;
     if (id !== '') {
-      const coords = await getCoords(id);
+      const coords = await fetch(`http://localhost:3003/GETCOORDS/${id}`).then((response) => response.json());
       setData(coords);
     } else {
       setData(null);

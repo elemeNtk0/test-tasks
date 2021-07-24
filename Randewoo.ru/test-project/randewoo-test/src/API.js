@@ -1,6 +1,6 @@
 export async function getCoords(objectId) {
-  // let timeout = Math.random() * 1000; // 4000 - 10000ms
-  const timeout = (Math.random() * 6 + 4) * 1000; // 4000 - 10000ms
+  let timeout = Math.random() * 1000; // 4000 - 10000ms
+  // const timeout = (Math.random() * 6 + 4) * 1000; // 4000 - 10000ms
   const coords = [];
 
   const coordsLength = Math.floor(Math.random() * 100); // 0 to 100
